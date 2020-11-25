@@ -1,0 +1,29 @@
+<div class="col-xs-10">
+	<app-shopping-edit [clickedIngredient]="clickedIngredient"></app-shopping-edit>
+
+	<hr>
+
+  <ul class="list-group">
+    <a
+    href="#"
+    style="width: 100%; border: 0.5px solid gainsboro;"
+		class="list-group-item list-group-item-action"
+		*ngFor="let ingredient of ingredients"
+		[ngClass]="{active: ingredient.name === clickedIngredient.name ? true : false}"
+		(click)="clickedIngredient = ingredient">
+
+			{{ ingredient.name }}
+
+			<ng-container *ngIf="ingredient.name != ingredientToUpdate.name; else update">
+				({{ ingredient.amount }})
+			</ng-container>
+
+			<ng-template #update>
+				<button (click)="onDecreaseIngredientAmount()" class="btn btn-warning btn-sm">-</button>
+				{{ingredient.amount}}
+				<button (click)="onIncreaseIngredientAmount()" class="btn btn-warning btn-sm">+</button>
+				<button (click)="onFinishUpdatingIngredient()" class="btn btn-success btn-sm finish-update-btn">OK</button>
+			</ng-template>
+		</a>
+	</ul>
+</div>

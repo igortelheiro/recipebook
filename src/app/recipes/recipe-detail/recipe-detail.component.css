@@ -1,0 +1,20 @@
+.add-ingredient-btn {
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+div.btn-group, .finish-update-recipe {
+	margin-bottom: 20px;
+}
+
+.finish-update-recipe {
+	margin-left: 10px;
+}
+
+.btn {
+	align-self: center;
+}
+
+.col-sm-2 {
+	align-self: center;
+}

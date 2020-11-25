@@ -1,0 +1,75 @@
+<div class="col-xs-12">
+	<img [src]="oppenedRecipe.imagePath" [alt]="oppenedRecipe.title" class="img-fluid">
+
+	<h1>{{ oppenedRecipe.title }}</h1>
+
+	<p>{{ oppenedRecipe.description }}</p>
+
+	<div class="btn-group dropright">
+		<button
+		type="button"
+		class="btn btn-primary dropdown-toggle"
+		data-toggle="dropdown"
+		aria-haspopup="true"
+		aria-expanded="false">
+			Manage Recipe
+		</button>
+		<!-- SPLIT BUTTON -->
+		<!-- <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button> -->
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#" (click)="addRecipeToShoppingList()">Add To Shopping List</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#" (click)="editRecipe()">Edit Recipe</a>
+			<a class="dropdown-item" href="#" (click)="delRecipe()">Delete Recipe</a>
+		</div>
+	</div>
+
+	<ng-container *ngIf="recipeBeingEdit">
+		<button class="btn btn-warning finish-update-recipe" (click)="recipeBeingEdit = null">Finish</button>
+
+		<div class="row" style="width: 100%">
+      <div class="col-sm-5 form-group">
+        <label for="name">Name</label>
+				<input
+				type="text"
+				id="name"
+				class="form-control"
+				#nameInput>
+			</div>
+
+      <div class="col-sm-3 form-group">
+        <label for="amount">Amount</label>
+				<input
+				type="number"
+				id="amount"
+				class="form-control"
+				style="width: 80px;"
+				#amountInput>
+			</div>
+
+			<div class="col-sm-2">
+				<button class="btn btn-success btn-sm" (click)="addIngredientIntoRecipe(nameInput, amountInput)">Add</button>
+			</div>
+		</div>
+	</ng-container>
+
+	<ul class="list-group" style="margin-top: 10px;">
+		<li class="list-group-item" *ngFor="let ingredient of oppenedRecipe.ingredients">
+			<ng-container *ngIf="!recipeBeingEdit; else _recipeBeingEdit">
+				<ng-container *ngIf="!isIngredientAlreadyAdded(ingredient); else _ingredientAlreadyAdded">
+					<button (click)="onAddIngredientToShoppingList(ingredient)" class="btn btn-success btn-sm add-ingredient-btn">+</button>
+				</ng-container>
+
+				<ng-template #_ingredientAlreadyAdded>
+					<button (click)="onDelIngredientOfShoppingList(ingredient)" class="btn btn-danger btn-sm add-ingredient-btn">-</button>
+				</ng-template>
+			</ng-container>
+
+			<ng-template #_recipeBeingEdit>
+				<button (click)="delIngredientFromRecipe(ingredient)" class="btn btn-danger btn-sm add-ingredient-btn">x</button>
+			</ng-template>
+
+			{{ ingredient.name }} ({{ ingredient.amount }})
+		</li>
+	</ul>
+</div>

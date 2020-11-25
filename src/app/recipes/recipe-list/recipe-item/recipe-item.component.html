@@ -1,0 +1,18 @@
+<a
+	href="#"
+	style="width: 100%; border: 0.5px solid gainsboro; max-height: 100px; height: 100px;"
+	class="list-group-item list-group-item-action"
+	[ngClass]="{active: recipe.title === oppenedRecipe.title ? true : false}">
+		<div class="float-left">
+			<h4>{{ recipe.title }}</h4>
+			<p>{{ recipe.description }}</p>
+		</div>
+
+		<div class="float-right py-2">
+			<img
+			[src]="recipe.imagePath"
+			[alt]="recipe.title"
+			style="max-height: 50px;"
+			class="img-fluid">
+		</div>
+</a>

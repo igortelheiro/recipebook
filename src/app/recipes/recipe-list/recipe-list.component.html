@@ -1,0 +1,14 @@
+<button class="btn btn-success">New Recipe</button>
+<!-- <input type="file" #file> -->
+<!-- <button (click)="displayPath(file)">Send</button> -->
+
+<hr>
+
+<div class="list-group list-group-flush">
+	<app-recipe-item
+		*ngFor="let recipe of recipes"
+		[recipe]="recipe"
+		[oppenedRecipe]="oppenedRecipe"
+		(click)="openRecipe(recipe)">
+	</app-recipe-item>
+</div>
